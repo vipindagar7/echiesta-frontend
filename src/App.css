@@ -1,0 +1,9 @@
+@import "tailwindcss";  
+.nav-link{
+  @apply text-purple-300 dark:text-white font-medium hover:text-purple-500 transition;
+}
+
+.mobile-link{
+  @apply text-lg text-gray-800 dark:text-white hover:text-purple-500 transition;
+}
+
