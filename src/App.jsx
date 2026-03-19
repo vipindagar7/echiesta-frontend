@@ -1,10 +1,5 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/navbar';
-import VideoBackground from './components/videoBg';
-import Events from './components/event';
-import Schedule from './components/schedule';
-import Contact from './components/contact';
 import RegisterDj from './pages/Register-Dj';
 import RegisterEvent from './pages/Register-event';
 import Home from './pages/Home';
