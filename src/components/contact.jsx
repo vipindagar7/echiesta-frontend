@@ -19,24 +19,7 @@ export default function Contact() {
       phone: "8595645795",
     },
   ];
-  const facultyCoordinators = [
-    {
-      name: "Abhinav Sharma",
-      phone: "9971713324",
-    },
-    {
-      name: "Raghav",
-      phone: "8130707852",
-    },
-    {
-      name: "Shuddhi",
-      phone: "9897988170",
-    },
-    {
-      name: "Sapna",
-      phone: "8595645795",
-    },
-  ];
+
 
   return (
     <section
