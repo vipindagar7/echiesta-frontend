@@ -7,3 +7,15 @@
   @apply text-lg text-gray-800 dark:text-white hover:text-purple-500 transition;
 }
 
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}

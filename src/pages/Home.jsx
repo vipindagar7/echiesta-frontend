@@ -4,13 +4,13 @@ import Schedule from '../components/schedule'
 import Contact from '../components/contact'
 import VideoBackground from '../components/videoBg'
 import StarBackground from '../components/starBackground'
-import HeroSection from '../components/hero-section'
+import RegisterDj from '../pages/Register-Dj'
 const Home = () => {
     return (
         <>
 
             <VideoBackground />
-            <HeroSection />
+            <RegisterDj />
             <Events />
             <Schedule />
             <Contact />

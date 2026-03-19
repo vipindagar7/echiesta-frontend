@@ -10,6 +10,7 @@ import RegisterEvent from './pages/Register-event';
 import Home from './pages/Home';
 import MainLayout from './layouts/main-layout';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import StarNightRegister from './pages/StarNightRegister';
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
           <Route path="/register" element={<RegisterEvent />} />
 
 
-          <Route path="/register-dj" element={<RegisterDj />} />
+          <Route path="/star-night" element={<RegisterDj />} />
+          <Route path="/star-night-register" element={<StarNightRegister />} />
 
         </Route>
 
