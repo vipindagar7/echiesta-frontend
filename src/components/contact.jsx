@@ -19,30 +19,43 @@ export default function Contact() {
       phone: "8595645795",
     },
   ];
+  const facultyCoordinators = [
+    {
+      name: "Abhinav Sharma",
+      phone: "9971713324",
+    },
+    {
+      name: "Raghav",
+      phone: "8130707852",
+    },
+    {
+      name: "Shuddhi",
+      phone: "9897988170",
+    },
+    {
+      name: "Sapna",
+      phone: "8595645795",
+    },
+  ];
 
   return (
     <section
       id="contact"
-      className="py-20 px-6 bg-gradient-to-b from-gray-900 to-black text-white"
+      className="py-20 px-6 bg-gradient-to-b from-gray-700 to-black text-white"
     >
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-        
-        {/* Info */}
-        <div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Contact Us
-          </h2>
 
-          <p className="text-gray-300 mb-6">
-            Have questions about the fest? Reach out to us and we will
-            get back to you soon.
+        {/* Contact Section */}
+        <div className="text-center mt-10">
+          <h3 className="text-2xl font-semibold mb-4">Contact Us</h3>
+
+          <p className="text-gray-300 mb-2">
+            📧 Email: <span className="text-white">echiesta@eitfaridabad.co.in</span>
           </p>
 
-          <div className="space-y-4">
-            <p>📍 EIT College Campus</p>
-            <p>📧 echiesta@eitfaridabad.co.in</p>
-            <p>📞 +91 9876543210</p>
-          </div>
+          <p className="text-gray-300">
+            📍 Location: <span className="text-white">EIT Faridabad</span>
+          </p>
         </div>
 
         {/* Student Coordinators */}

@@ -14,7 +14,7 @@ export default function Footer() {
           <img src={logo} alt="EIT Logo" className="h-10 mb-4" />
 
           <p className="text-sm text-gray-400">
-            EIT Cultural Fest is a celebration of music, innovation,
+            EIT Cultural Techno-Fest is a celebration of music, innovation,
             dance, creativity and student talent.
           </p>
         </div>
@@ -40,16 +40,18 @@ export default function Footer() {
 
           <ul className="space-y-2">
             <li>
-              <a href="/register-events" className="hover:text-purple-400 transition">
+              <p>
+                <a href="/register-events" className="hover:text-purple-400 transition">
                 Register for Events
               </a>
+              </p>
+              <p>
+                <a href="/star-night-register" className="hover:text-purple-400 transition">
+                Register for concert
+              </a>
+              </p>
             </li>
 
-            {/* <li>
-              <a href="/register-dj" className="hover:text-purple-400 transition">
-                DJ Night Pass
-              </a>
-            </li> */}
           </ul>
         </div>
 
@@ -68,7 +70,7 @@ export default function Footer() {
           </p>
 
           <p className="text-sm text-gray-400 mt-2">
-            eitfest@email.com
+            eichiesta@eitfaridabad.co.in
           </p>
 
           {/* Social icons */}

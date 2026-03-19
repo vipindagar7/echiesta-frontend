@@ -23,8 +23,8 @@ export default function EventCategories() {
 
             <div className="max-w-7xl mx-auto">
 
-                <h2 className="text-4xl font-bold text-center mb-14">
-                    ECHIESTA 2K26 Events
+                <h2 className="text-6xl font-bold text-center mb-14 story-script-regular">
+                    Everything is 100% Worth Showing Up For
                 </h2>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -5,14 +5,16 @@ import Contact from '../components/contact'
 import VideoBackground from '../components/videoBg'
 import StarBackground from '../components/starBackground'
 import RegisterDj from '../pages/Register-Dj'
+import Sponsor from '../components/sponsor'
+import EventPoster from '../components/eventPOster'
 const Home = () => {
     return (
         <>
-
             <VideoBackground />
             <RegisterDj />
-            <Events />
+            <EventPoster />
             <Schedule />
+            <Sponsor/>
             <Contact />
         </>
     )

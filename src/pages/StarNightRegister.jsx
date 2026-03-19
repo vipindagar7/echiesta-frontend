@@ -92,7 +92,7 @@ const downloadQR = () => {
 
                     <div className="mt-6 space-y-2 text-sm text-gray-400">
                         <p>📅 28 March</p>
-                        <p>⏰ 9:00 PM</p>
+                        <p>⏰ 5:00 PM</p>
                         <p>📍 EIT Faridabad</p>
                     </div>
                 </div>

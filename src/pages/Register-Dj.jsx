@@ -24,42 +24,53 @@ export default function DJHeroSectionPro() {
         <div className="space-y-8">
 
           {/* Tag */}
-          <div className="inline-block px-4 py-1 border border-yellow-400/40 rounded-full text-yellow-400 text-xs tracking-[3px]">
+          <div className="inline-block px-4 py-1 border border-purple-500/40 rounded-full text-purple-500 text-xl tracking-[3px]">
             28 MARCH 2k26 • LIVE NIGHT
           </div>
 
           {/* Heading */}
-          <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.1]">
-            Feel The Energy <br />
-            <span className="relative text-yellow-400">
-              Saturday Night
+          <h1 className="text-4xl md:text-5xl font-extrabold leading-[1.1]">
+            Sing It Like “Tum Se Hi”
+            <br />
+            <span className="relative text-purple-500 text-4xl">
+              Feel It Like Never Before
               <span className="absolute -bottom-2 left-0 w-full h-2 bg-yellow-400/30 blur-md"></span>
             </span>
           </h1>
 
           {/* Description */}
-          <p className="text-gray-400 max-w-lg text-lg">
-            Step into a night of electrifying beats, immersive lighting, and unforgettable moments with Mohit Chauhan.
+          <p className="text-gray-400 text-2xl m-0 p-0" >
+            An Evening of Songs You Already Love
           </p>
+          <p className="text-gray-400 text-2xl">
+            A Night You Won’t Forget
+          </p>
+
+          <p className="text-gray-400 max-w-lg text-md">
+            An artist whose music lives beyond playlists, <span className="text-purple-500 text-xl">Mohit Chauhan</span> delivers an experience that stays with you long after the night ends.          </p>
 
           {/* CTA */}
           <div className="flex gap-4 flex-wrap">
-            <a href="./star-night-register" className="px-7 py-3 bg-yellow-400 text-black font-semibold rounded-xl shadow-[0_10px_40px_rgba(255,255,0,0.4)] hover:scale-105 transition">
-              🎟 Book Tickets
+            <a href="./star-night-register" className="px-7 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl  hover:scale-105 transition text-ll">
+              Register for Concert
             </a>
 
-            <a href="/#events" className="px-7 py-3 border border-white/20 rounded-xl hover:bg-white/10 backdrop-blur-md transition">
-              Explore Events
+            <a href="./register-events" className="px-7 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl hover:scale-105 transition text-ls">
+              Register to Participate
             </a>
+
+            {/* <a href="/#events" className="px-7 py-3 border border-white/20 rounded-xl hover:bg-white/10 backdrop-blur-md transition">
+              Explore Events
+            </a> */}
           </div>
 
           {/* Info Strip */}
           <div className="flex flex-wrap gap-6 text-sm text-gray-400 pt-4">
-            <div className="flex items-center gap-2">
-              ⏰ <span>9:00 PM Onwards</span>
+            <div className="flex items-center gap-2 text-2xl">
+              <span>Entry gate closes at 5:30 PM</span>
             </div>
             <div className="flex items-center gap-2">
-              📍 <span>EIT Faridabad</span>
+              <span>Limited Seats Available</span>
             </div>
           </div>
         </div>
@@ -81,9 +92,9 @@ export default function DJHeroSectionPro() {
           />
 
           {/* Floating Badge */}
-          <div className="absolute bottom-6 right-6 bg-gradient-to-r from-red-600 to-pink-600 px-4 py-2 rounded-lg text-sm font-bold shadow-lg">
+          {/* <div className="absolute bottom-6 right-6 bg-gradient-to-r from-red-600 to-pink-600 px-4 py-2 rounded-lg text-sm font-bold shadow-lg">
             Mohit Chauhan
-          </div>
+          </div> */}
         </div>
       </div>
 
