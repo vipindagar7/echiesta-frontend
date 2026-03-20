@@ -41,7 +41,7 @@ const schedule = {
     { time: "04:00 PM", event: "Stage Play", category: "Curtain Call", venue: "Main Stage" },
     { time: "05:00 PM", event: "Bands", category: "Rhythm & Riffs", venue: "Main Stage" },
     { time: "07:30 PM", event: "Fashion Show (Faculty)", category: "Runway of Knowledge", venue: "Main Stage" },
-    { time: "08:00 PM", event: "Star Night (B Praak)", category: "Star Night", venue: "Main Stage" },
+    { time: "08:00 PM", event: "Star Night (Mohit Chauhan)", category: "Star Night", venue: "Main Stage" },
   ],
 };
 
