@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const API_URL = import.meta.env.VITE_API_URL
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Login() {
   const navigate = useNavigate();
-  const [error,setError] = useState()
+
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState(false); // ✅ loading state
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -13,6 +17,9 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true); // ✅ start loading
+    setError(null);
 
     try {
       const res = await axios.post(
@@ -28,16 +35,17 @@ export default function Login() {
       // redirect based on role
       if (res.data.user.role === "admin") {
         navigate("/admin");
-      } else if (res.data.user.role === "user"){
+      } else if (res.data.user.role === "user") {
         navigate("/user");
       } else {
-        navigate("/scanner")
+        navigate("/scanner");
       }
 
     } catch (err) {
       setError(err.response?.data?.message);
-
       console.error(err.response?.data?.message);
+    } finally {
+      setLoading(false); // ✅ stop loading
     }
   };
 
@@ -66,9 +74,18 @@ export default function Login() {
             setFormData({ ...formData, password: e.target.value })
           }
         />
-        {error && <p className="text-red-800">{error}</p>}
-        <button className="w-full bg-blue-600 py-2 rounded text-white">
-          Login
+
+        {error && <p className="text-red-500">{error}</p>}
+
+        <button
+          disabled={loading}
+          className={`w-full py-2 rounded text-white transition ${
+            loading
+              ? "bg-gray-500 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700"
+          }`}
+        >
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>
