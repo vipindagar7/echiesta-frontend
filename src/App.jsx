@@ -18,6 +18,8 @@ import GetUsers from './pages/GetUsers';
 import GetConcertRegistration from './pages/GetConcertRegistration';
 import GetEventRegistration from './pages/GetEventRegistration';
 import EventRegistrationDetails from './pages/GetEventRegistrationDetail';
+import ScannerLayout from './layouts/scannerLayout';
+import ScannerDashboard from './pages/ScannerDashboard';
 
 function App() {
   return (
@@ -54,6 +56,22 @@ function App() {
             <Route path="event-registration-details/:id" element={<EventRegistrationDetails />} />
           </Route>
 
+          {/* scanner */}
+          <Route
+            path="/scanner"
+            element={
+              <ProtectedRoute role="admin">
+                <ScannerLayout />
+              </ProtectedRoute>
+            }
+          >
+          
+            <Route index element={<ScannerDashboard />} />
+            <Route path="get-concert-registration" element={<GetConcertRegistration />} />
+            <Route path="get-event-registration" element={<GetEventRegistration />} />
+            <Route path="event-registration-details/:id" element={<EventRegistrationDetails />} />
+
+          </Route>
           {/* admin */}
           <Route
             path="/admin"

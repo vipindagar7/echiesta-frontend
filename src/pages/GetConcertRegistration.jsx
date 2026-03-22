@@ -117,7 +117,7 @@ const StarNightRegistrations = () => {
                             <tr key={item._id} className="text-center border-t">
 
                                 {/* Serial Number */}
-                                <td className="p-2">{(page - 1) * 10 + index + 1}</td>
+                                <td className="p-2">{(page - 1) * 50 + index + 1}</td>
 
                                 {/* UID (short) */}
                                 <td className="text-xs text-gray-600">

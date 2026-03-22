@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env.VITE_API_URL;
 
 const CreateUser = () => {
   const [form, setForm] = useState({
@@ -11,8 +11,12 @@ const CreateUser = () => {
     role: "user",
   });
 
+  const [loading, setLoading] = useState(false); // ✅ loading state
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true); // start loading
 
     try {
       await axios.post(
@@ -22,10 +26,18 @@ const CreateUser = () => {
       );
 
       alert("User created successfully");
-      setForm({ name: "", email: "", password: "", role: "user" });
+
+      setForm({
+        name: "",
+        email: "",
+        password: "",
+        role: "user",
+      });
 
     } catch (err) {
       alert(err.response?.data?.message || "Error creating user");
+    } finally {
+      setLoading(false); // stop loading
     }
   };
 
@@ -66,10 +78,17 @@ const CreateUser = () => {
         >
           <option value="user">User</option>
           <option value="admin">Admin</option>
+          <option value="scanner">Scanner</option>
         </select>
 
-        <button className="w-full bg-blue-600 text-white py-2 rounded">
-          Create User
+        <button
+          disabled={loading}
+          className={`w-full py-2 rounded text-white transition ${loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700"
+            }`}
+        >
+          {loading ? "Creating..." : "Create User"}
         </button>
 
       </form>

@@ -20,13 +20,51 @@ export default function StarNightRegister() {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+    const validateForm = () => {
+        const { name, email, phone, institute, aadhar } = formData;
+
+        if (!name.trim()) {
+            return "Name is required";
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return "Invalid email address";
+        }
+
+        if (!/^\d{10}$/.test(phone)) {
+            return "Phone number must be 10 digits";
+        }
+
+        if (!institute.trim()) {
+            return "Institute is required";
+        }
+
+        if (!/^\d{12}$/.test(aadhar)) {
+            return "Aadhar must be 12 digits";
+        }
+
+        return null;
+    };
 
     // Submit
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
+        // validate 
+
+        const error = validateForm();
+
+        if (error) {
+            setErrorMsg(error);
+            setLoading(false);
+
+            return;
+        }
+
+
         try {
+
             const res = await axios.post(
                 `${API_URL}/api/star-night/register`,
                 formData
@@ -45,37 +83,37 @@ export default function StarNightRegister() {
         }
     };
 
-// Download QR as PNG
-const downloadQR = () => {
-    const svg = document.getElementById("qr-code");
-    const serializer = new XMLSerializer();
-    const source = serializer.serializeToString(svg);
+    // Download QR as PNG
+    const downloadQR = () => {
+        const svg = document.getElementById("qr-code");
+        const serializer = new XMLSerializer();
+        const source = serializer.serializeToString(svg);
 
-    const img = new Image();
-    const svgBlob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
-    const url = URL.createObjectURL(svgBlob);
+        const img = new Image();
+        const svgBlob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(svgBlob);
 
-    img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
+        img.onload = () => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
 
-        canvas.width = img.width;
-        canvas.height = img.height;
+            canvas.width = img.width;
+            canvas.height = img.height;
 
-        ctx.drawImage(img, 0, 0);
+            ctx.drawImage(img, 0, 0);
 
-        URL.revokeObjectURL(url);
+            URL.revokeObjectURL(url);
 
-        const pngUrl = canvas.toDataURL("image/png");
+            const pngUrl = canvas.toDataURL("image/png");
 
-        const link = document.createElement("a");
-        link.href = pngUrl;
-        link.download = "star-night-ticket.png";
-        link.click();
+            const link = document.createElement("a");
+            link.href = pngUrl;
+            link.download = "star-night-ticket.png";
+            link.click();
+        };
+
+        img.src = url;
     };
-
-    img.src = url;
-};
     return (
         <section className="min-h-screen flex items-center justify-center bg-black px-4 text-white">
 
