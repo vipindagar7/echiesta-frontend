@@ -1,8 +1,27 @@
+import axios from "axios";
 import React from "react";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const ScannerLayout = () => {
+   async function handleLogout() {
+    try {
+      await axios.post(
+        `${API_URL}/api/auth/logout`,
+        {},
+        { withCredentials: true }
+      );
+    } catch (err) {
+      console.error("Logout API failed", err);
+    } finally {
+
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      window.location.href = "/admin-login";
+    }
+  }
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center px-4 py-6">
+        <button className="bg-red-800 hover:bg-red-400 text-white p-1 rounded-xl" onClick={handleLogout}>Logout</button>
 
       {/* Header */}
       <h1 className="text-3xl font-bold mb-6">🎫 Event Check-in</h1>

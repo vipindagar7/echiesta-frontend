@@ -60,8 +60,12 @@ const StarNightRegistrations = () => {
         <div className="p-6">
 
             <h2 className="text-2xl font-bold mb-4">
-                Star Night Registrations
+                Star Night Registrations 
             </h2>
+            <div className="search">
+                <span><input type="text" className="uid" /></span>
+                <span><input type="text" className="uid" /></span>
+            </div>
 
             {/* Table */}
             <div className="overflow-x-auto">

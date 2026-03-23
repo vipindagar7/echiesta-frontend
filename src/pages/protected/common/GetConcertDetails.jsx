@@ -76,7 +76,7 @@ const TicketCard = () => {
         try {
             setLoading((prev) => ({ ...prev, delete: true }));
 
-            await axios.delete(`${API_URL}/api/star-night/${ticket._id}`, {
+            await axios.delete(`${API_URL}/api/star-night/delete/${ticket._id}`, {
                 withCredentials: true,
             });
 
