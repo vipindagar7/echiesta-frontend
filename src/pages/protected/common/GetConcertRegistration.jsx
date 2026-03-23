@@ -1,42 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const StarNightRegistrations = () => {
+    const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [deletingId, setDeletingId] = useState(null);
-    const [checkingId, setCheckingId] = useState(null);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
-    const handleCheckIn = async (id) => {
-        const confirmCheck = window.confirm("Mark as checked-in?");
-        if (!confirmCheck) return;
-
-        try {
-            setCheckingId(id);
-
-            await axios.patch(
-                `${API_URL}/api/admin/star-night/checkin/${id}`,
-                {},
-                { withCredentials: true }
-            );
-
-            // update UI
-            setData((prev) =>
-                prev.map((item) =>
-                    item._id === id ? { ...item, checkedIn: true } : item
-                )
-            );
-
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setCheckingId(null);
-        }
-    };
     const fetchData = async () => {
         try {
             setLoading(true);
@@ -56,30 +30,23 @@ const StarNightRegistrations = () => {
         }
     };
 
+    const handleNavigate = (id) => {
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        if (!user?.role) {
+            console.error("User role not found");
+            return;
+        }
+
+        navigate(`/${user.role}/get-concert-registration/${id}`);
+    };
+
+
     useEffect(() => {
         fetchData();
     }, [page]);
 
-    const deleteRegistration = async (id) => {
-        const confirmDelete = window.confirm("Delete this registration?");
-        if (!confirmDelete) return;
 
-        try {
-            setDeletingId(id);
-
-            await axios.delete(
-                `${API_URL}/api/admin/star-night/${id}`,
-                { withCredentials: true }
-            );
-
-            setData((prev) => prev.filter((item) => item._id !== id));
-
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setDeletingId(null);
-        }
-    };
 
     if (loading) {
         return (
@@ -138,24 +105,10 @@ const StarNightRegistrations = () => {
 
                                     {/* Check-in Button */}
                                     <button
-                                        onClick={() => handleCheckIn(item._id)}
-                                        disabled={checkingId === item._id || item.checkedIn}
+                                        onClick={() => handleNavigate(item._id)}
                                         className="bg-green-600 text-white px-2 py-1 rounded"
                                     >
-                                        {checkingId === item._id
-                                            ? "Checking..."
-                                            : item.checkedIn
-                                                ? "Done"
-                                                : "Check In"}
-                                    </button>
-
-                                    {/* Delete Button */}
-                                    <button
-                                        onClick={() => deleteRegistration(item._id)}
-                                        disabled={deletingId === item._id}
-                                        className="bg-red-600 text-white px-2 py-1 rounded"
-                                    >
-                                        {deletingId === item._id ? "Deleting..." : "Delete"}
+                                        Get Details
                                     </button>
 
                                 </td>

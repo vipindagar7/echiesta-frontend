@@ -1,25 +1,31 @@
-import React from 'react';
 import './App.css';
-import RegisterDj from './pages/Register-Dj';
-import RegisterEvent from './pages/Register-event';
-import Home from './pages/Home';
-import MainLayout from './layouts/main-layout';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import StarNightRegister from './pages/StarNightRegister';
-import { LogIn } from 'lucide-react';
+
+import Home from './pages/Home';
 import Login from './pages/Login';
+import RegisterDj from './pages/Register-Dj';
+import StarNightRegister from './pages/StarNightRegister';
+import RegisterEvent from './pages/Register-event';
+// layouts
+import MainLayout from './layouts/main-layout';
 import ProtectedRoute from './lib/protectedRole';
-import UserLayout from './layouts/userLayout';
-import Dashboard from './pages/UserDashboard';
-import AdminLayout from './layouts/adminLayout';
-import AdminDashboard from './pages/AdminDashboard';
-import CreateUser from './pages/CreateUser';
-import GetUsers from './pages/GetUsers';
-import GetConcertRegistration from './pages/GetConcertRegistration';
-import GetEventRegistration from './pages/GetEventRegistration';
-import EventRegistrationDetails from './pages/GetEventRegistrationDetail';
 import ScannerLayout from './layouts/scannerLayout';
-import ScannerDashboard from './pages/ScannerDashboard';
+import UserLayout from './layouts/userLayout';
+import AdminLayout from './layouts/adminLayout';
+
+import Dashboard from './pages/protected/user/UserDashboard';
+
+import AdminDashboard from './pages/protected/admin/AdminDashboard';
+import CreateUser from './pages/protected/admin/CreateUser';
+import GetUsers from './pages/protected/admin/GetUsers';
+
+import ScannerDashboard from './pages/protected/scanner/ScannerDashboard';
+
+import GetConcertRegistration from './pages/protected/common/GetConcertRegistration';
+import GetEventRegistration from './pages/protected/common/GetEventRegistration';
+import EventRegistrationDetails from './pages/protected/common/GetEventRegistrationDetail';
+import TicketCard from './pages/protected/common/GetConcertDetails';
 
 function App() {
   return (
@@ -30,9 +36,7 @@ function App() {
 
           {/* Layout Wrapper */}
           <Route element={<MainLayout />}>
-
             <Route path="/" element={<Home />} />
-
             <Route path="/register-events" element={<RegisterEvent />} />
             <Route path="/register" element={<RegisterEvent />} />
             <Route path="/star-night" element={<RegisterDj />} />
@@ -52,6 +56,7 @@ function App() {
             {/* Nested routes */}
             <Route index element={<Dashboard />} />
             <Route path="get-concert-registration" element={<GetConcertRegistration />} />
+            <Route path="get-concert-registration/:id" element={<TicketCard/>} />
             <Route path="get-event-registration" element={<GetEventRegistration />} />
             <Route path="event-registration-details/:id" element={<EventRegistrationDetails />} />
           </Route>
@@ -60,14 +65,14 @@ function App() {
           <Route
             path="/scanner"
             element={
-              <ProtectedRoute role="admin">
+              <ProtectedRoute role="scanner">
                 <ScannerLayout />
               </ProtectedRoute>
             }
           >
-          
             <Route index element={<ScannerDashboard />} />
             <Route path="get-concert-registration" element={<GetConcertRegistration />} />
+            <Route path="get-concert-registration/:id" element={<TicketCard/>} />
             <Route path="get-event-registration" element={<GetEventRegistration />} />
             <Route path="event-registration-details/:id" element={<EventRegistrationDetails />} />
 
@@ -85,6 +90,7 @@ function App() {
             <Route index element={<AdminDashboard />} />
             <Route path="create-user" element={<CreateUser />} />
             <Route path="get-users" element={<GetUsers />} />
+            <Route path="get-concert-registration/:id" element={<TicketCard/>} />
             <Route path="get-concert-registration" element={<GetConcertRegistration />} />
             <Route path="get-event-registration" element={<GetEventRegistration />} />
             <Route path="event-registration-details/:id" element={<EventRegistrationDetails />} />
