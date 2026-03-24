@@ -6,22 +6,58 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const StarNightRegistrations = () => {
     const navigate = useNavigate();
+
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
+
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+
+    // ✅ search states
+    const [search, setSearch] = useState({
+        name: "",
+        email: "",
+        phone: ""
+    });
+
+    // ✅ debounce state (important)
+    const [debouncedSearch, setDebouncedSearch] = useState(search);
+
+    // 🔥 debounce effect
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedSearch(search);
+            setPage(1);
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, [search]);
 
     const fetchData = async () => {
         try {
             setLoading(true);
+            const isSearching =
+                debouncedSearch.name ||
+                debouncedSearch.email ||
+                debouncedSearch.phone;
 
-            const res = await axios.get(
-                `${API_URL}/api/star-night/getRegistrations?page=${page}&limit=50`,
-                { withCredentials: true }
-            );
+            const url = isSearching
+                ? `${API_URL}/api/star-night/search`
+                : `${API_URL}/api/star-night/getRegistrations`;
 
-            setData(res.data.data);
-            setTotalPages(res.data.totalPages);
+            const res = await axios.get(url, {
+                params: {
+                    page,
+                    limit: 50,
+                    name: debouncedSearch.name,
+                    email: debouncedSearch.email,
+                    phone: debouncedSearch.phone
+                },
+                withCredentials: true
+            });
+
+            setData(Array.isArray(res.data.data) ? res.data.data : []);
+            setTotalPages(res.data.totalPages || 1);
 
         } catch (error) {
             console.error(error);
@@ -41,12 +77,9 @@ const StarNightRegistrations = () => {
         navigate(`/${user.role}/get-concert-registration/${id}`);
     };
 
-
     useEffect(() => {
         fetchData();
-    }, [page]);
-
-
+    }, [page, debouncedSearch]); // ✅ important
 
     if (loading) {
         return (
@@ -60,11 +93,40 @@ const StarNightRegistrations = () => {
         <div className="p-6">
 
             <h2 className="text-2xl font-bold mb-4">
-                Star Night Registrations 
+                Star Night Registrations
             </h2>
-            <div className="search">
-                <span><input type="text" className="uid" /></span>
-                <span><input type="text" className="uid" /></span>
+
+            {/* 🔥 Search */}
+            <div className="flex gap-3 mb-4">
+                <input
+                    type="text"
+                    placeholder="Search by Name"
+                    value={search.name}
+                    onChange={(e) =>
+                        setSearch({ ...search, name: e.target.value })
+                    }
+                    className="border p-2 rounded w-full"
+                />
+
+                <input
+                    type="text"
+                    placeholder="Search by Email"
+                    value={search.email}
+                    onChange={(e) =>
+                        setSearch({ ...search, email: e.target.value })
+                    }
+                    className="border p-2 rounded w-full"
+                />
+
+                <input
+                    type="text"
+                    placeholder="Search by Phone"
+                    value={search.phone}
+                    onChange={(e) =>
+                        setSearch({ ...search, phone: e.target.value })
+                    }
+                    className="border p-2 rounded w-full"
+                />
             </div>
 
             {/* Table */}
@@ -84,13 +146,13 @@ const StarNightRegistrations = () => {
                     </thead>
 
                     <tbody>
-                        {data.map((item, index) => (
+                        {Array.isArray(data) && data.map((item, index) => (
                             <tr key={item._id} className="text-center border-t">
 
-                                {/* Serial Number */}
-                                <td className="p-2">{(page - 1) * 50 + index + 1}</td>
+                                <td className="p-2">
+                                    {(page - 1) * 50 + index + 1}
+                                </td>
 
-                                {/* UID (short) */}
                                 <td className="text-xs text-gray-600">
                                     {item._id}
                                 </td>
@@ -98,29 +160,20 @@ const StarNightRegistrations = () => {
                                 <td>{item.name}</td>
                                 <td>{item.email}</td>
                                 <td>{item.phone}</td>
+                                <td>{item.institute}</td>
 
-                                {/* Check-in status */}
-                                <td>
-                                    {item.institute}
-                                </td>
-
-                                {/* Actions */}
                                 <td className="flex gap-2 justify-center p-2">
-
-                                    {/* Check-in Button */}
                                     <button
                                         onClick={() => handleNavigate(item._id)}
                                         className="bg-green-600 text-white px-2 py-1 rounded"
                                     >
                                         Get Details
                                     </button>
-
                                 </td>
 
                             </tr>
                         ))}
                     </tbody>
-
                 </table>
             </div>
 
@@ -149,7 +202,6 @@ const StarNightRegistrations = () => {
 
             </div>
 
-            {/* Empty state */}
             {data.length === 0 && (
                 <p className="text-center mt-4 text-gray-500">
                     No registrations found

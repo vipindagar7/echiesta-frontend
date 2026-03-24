@@ -1,9 +1,13 @@
-import axios from "axios";
 import React from "react";
+import axios from "axios";
+import { useNavigate, Outlet } from "react-router-dom";
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 const ScannerLayout = () => {
-   async function handleLogout() {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
     try {
       await axios.post(
         `${API_URL}/api/auth/logout`,
@@ -13,57 +17,30 @@ const ScannerLayout = () => {
     } catch (err) {
       console.error("Logout API failed", err);
     } finally {
-
-      localStorage.removeItem("user");
-      localStorage.removeItem("token");
-      window.location.href = "/admin-login";
+      localStorage.clear();
+      navigate("/admin-login");
     }
-  }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center px-4 py-6">
-        <button className="bg-red-800 hover:bg-red-400 text-white p-1 rounded-xl" onClick={handleLogout}>Logout</button>
+    <div className="min-h-screen bg-gray-900 text-white">
 
-      {/* Header */}
-      <h1 className="text-3xl font-bold mb-6">🎫 Event Check-in</h1>
+      {/* 🔥 Navbar */}
+      <div className="flex justify-between items-center px-6 py-4 bg-gray-800 shadow-md">
+        <h1 className="text-xl font-bold">🎫 Scanner Panel</h1>
 
-      {/* Scanner Box */}
-      <div className="w-full max-w-sm h-64 bg-black rounded-xl flex items-center justify-center relative overflow-hidden">
-
-        {/* Placeholder Camera */}
-        <p className="text-gray-400">Camera Preview</p>
-
-        {/* Scan Frame */}
-        <div className="absolute border-2 border-green-500 w-48 h-48 rounded-lg animate-pulse"></div>
-      </div>
-
-      {/* Info Card */}
-      <div className="mt-6 w-full max-w-sm bg-gray-800 p-5 rounded-xl shadow-lg space-y-2">
-
-        <h2 className="text-lg font-semibold text-center mb-2">
-          User Details
-        </h2>
-
-        <p><strong>Name:</strong> ---</p>
-        <p><strong>Email:</strong> ---</p>
-        <p><strong>Phone:</strong> ---</p>
-
-        <p>
-          <strong>Status:</strong>{" "}
-          <span className="text-yellow-400">Not Checked-in</span>
-        </p>
-
-        {/* Button */}
         <button
-          className="w-full mt-3 bg-green-600 hover:bg-green-700 py-2 rounded-lg transition"
+          onClick={handleLogout}
+          className="bg-red-600 hover:bg-red-700 px-4 py-1 rounded-lg"
         >
-          Check-in
+          Logout
         </button>
       </div>
 
-      {/* Footer Hint */}
-      <p className="text-gray-500 text-sm mt-6">
-        Scan the QR code to fetch user details
-      </p>
+      {/* 🔥 Page Content via Outlet */}
+      <div className="flex flex-col items-center p-6">
+        <Outlet />
+      </div>
 
     </div>
   );

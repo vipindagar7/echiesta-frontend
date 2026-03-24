@@ -26,6 +26,9 @@ import GetConcertRegistration from './pages/protected/common/GetConcertRegistrat
 import GetEventRegistration from './pages/protected/common/GetEventRegistration';
 import EventRegistrationDetails from './pages/protected/common/GetEventRegistrationDetail';
 import TicketCard from './pages/protected/common/GetConcertDetails';
+import SearchUser from './components/searchConcert';
+import ScannerCamera from './components/scannerCamers';
+import ScannerTicketCard from './components/scannerGetTicket.';
 
 function App() {
   return (
@@ -56,7 +59,7 @@ function App() {
             {/* Nested routes */}
             <Route index element={<Dashboard />} />
             <Route path="get-concert-registration" element={<GetConcertRegistration />} />
-            <Route path="get-concert-registration/:id" element={<TicketCard/>} />
+            <Route path="get-concert-registration/:id" element={<TicketCard />} />
             <Route path="get-event-registration" element={<GetEventRegistration />} />
             <Route path="event-registration-details/:id" element={<EventRegistrationDetails />} />
           </Route>
@@ -72,7 +75,7 @@ function App() {
           >
             <Route index element={<ScannerDashboard />} />
             <Route path="get-concert-registration" element={<GetConcertRegistration />} />
-            <Route path="get-concert-registration/:id" element={<TicketCard/>} />
+            <Route path="get-concert-registration/:id" element={<TicketCard />} />
             <Route path="get-event-registration" element={<GetEventRegistration />} />
             <Route path="event-registration-details/:id" element={<EventRegistrationDetails />} />
 
@@ -90,10 +93,28 @@ function App() {
             <Route index element={<AdminDashboard />} />
             <Route path="create-user" element={<CreateUser />} />
             <Route path="get-users" element={<GetUsers />} />
-            <Route path="get-concert-registration/:id" element={<TicketCard/>} />
+            <Route path="get-concert-registration/:id" element={<TicketCard />} />
             <Route path="get-concert-registration" element={<GetConcertRegistration />} />
             <Route path="get-event-registration" element={<GetEventRegistration />} />
             <Route path="event-registration-details/:id" element={<EventRegistrationDetails />} />
+
+          </Route>
+
+          <Route
+            path="/scanner"
+            element={
+              <ProtectedRoute role="scanner">
+                <ScannerLayout />
+              </ProtectedRoute>
+            }
+          >
+            {/* Default → Camera */}
+            <Route index element={<ScannerDashboard />} />
+
+            {/* Search page */}
+            <Route path="scan" element={<ScannerCamera />} />
+
+            <Route path="ticket/:id" element={<ScannerTicketCard />} />
 
           </Route>
 
