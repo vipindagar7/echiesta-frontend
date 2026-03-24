@@ -128,6 +128,7 @@ const TicketCard = () => {
                     <p><strong>Email:</strong> {ticket?.email}</p>
                     <p><strong>Phone:</strong> {ticket?.phone}</p>
                     <p><strong>Institute:</strong> {ticket?.institute}</p>
+                    <p><strong>Institute Type:</strong> {ticket?.instituteType}</p>
                     <p><strong>Aadhar:</strong> {ticket?.aadhar}</p>
                 </div>
 
