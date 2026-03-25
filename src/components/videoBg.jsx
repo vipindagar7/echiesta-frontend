@@ -1,10 +1,10 @@
 import React from "react";
-
+import video from "../assets/mohit.mp4"
 export default function VimeoBackground() {
   return (
     <div className="relative w-full h-screen overflow-hidden">
 
-  {/* Desktop Video */}
+      {/* Desktop Video */}
       <div className="absolute inset-0 hidden md:block">
 
         <iframe
@@ -20,13 +20,15 @@ export default function VimeoBackground() {
       {/* Mobile Video */}
       <div className="absolute inset-0 block md:hidden">
 
-        <iframe
-          src="https://www.youtube.com/embed/X2k45p3IodA?autoplay=1&mute=1&loop=1&playlist=X2k45p3IodA&controls=0"
-          title="Mobile Background Video"
-          frameBorder="0"
-          allow="autoplay; fullscreen"
-          className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-        />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none"
+        >
+          <source src={video} type="video/mp4" />
+        </video>
 
       </div>
 
