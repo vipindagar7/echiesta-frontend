@@ -7,7 +7,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const ScannerCamera = () => {
     const navigate = useNavigate();
-
+    const [results, setResults] = useState([]);
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [loading, setLoading] = useState(false);
@@ -39,6 +39,7 @@ const ScannerCamera = () => {
     };
 
     // 🔍 Search
+
     const handleSearch = async (type) => {
         try {
             const value = type === "email" ? email : phone;
@@ -52,14 +53,15 @@ const ScannerCamera = () => {
                 { withCredentials: true }
             );
 
-            const id = res.data.data?._id;
+            const data = res.data.data;
 
-            if (!id) {
+            if (!data || data.length === 0) {
                 alert("User not found");
                 return;
             }
 
-            navigate(`/scanner/ticket/${id}`);
+            // 👇 store all results (array expected)
+            setResults(Array.isArray(data) ? data : [data]);
 
         } catch (err) {
             alert(err.response?.data?.message || "Search failed");
@@ -131,6 +133,45 @@ const ScannerCamera = () => {
                     {loading ? "Searching..." : "Search by Phone"}
                 </button>
 
+            </div>
+            <div>
+                {results.length > 0 && (
+                    <div className="mt-6 overflow-x-auto">
+                        <table className="min-w-full bg-gray-800 text-white rounded-lg overflow-hidden">
+
+                            <thead className="bg-gray-700">
+                                <tr>
+                                    <th className="px-4 py-2">Name</th>
+                                    <th className="px-4 py-2">Email</th>
+                                    <th className="px-4 py-2">Phone</th>
+                                    <th className="px-4 py-2">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {results.map((user) => (
+                                    <tr key={user._id} className="text-center border-b border-gray-600">
+
+                                        <td className="px-4 py-2">{user.name}</td>
+                                        <td className="px-4 py-2">{user.email}</td>
+                                        <td className="px-4 py-2">{user.phone}</td>
+
+                                        <td className="px-4 py-2">
+                                            <button
+                                                onClick={() => navigate(`/scanner/ticket/${user._id}`)}
+                                                className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700"
+                                            >
+                                                View Ticket
+                                            </button>
+                                        </td>
+
+                                    </tr>
+                                ))}
+                            </tbody>
+
+                        </table>
+                    </div>
+                )}
             </div>
         </div>
     );
