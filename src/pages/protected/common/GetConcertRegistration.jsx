@@ -48,7 +48,7 @@ const StarNightRegistrations = () => {
             const res = await axios.get(url, {
                 params: {
                     page,
-                    limit: 50,
+                    limit: 10,
                     name: debouncedSearch.name,
                     email: debouncedSearch.email,
                     phone: debouncedSearch.phone
@@ -150,7 +150,7 @@ const StarNightRegistrations = () => {
                             <tr key={item._id} className="text-center border-t">
 
                                 <td className="p-2">
-                                    {(page - 1) * 50 + index + 1}
+                                    {(page - 1) * 10 + index + 1}
                                 </td>
 
                                 <td className="text-xs text-gray-600">
