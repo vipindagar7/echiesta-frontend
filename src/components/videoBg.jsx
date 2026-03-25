@@ -27,7 +27,7 @@ export default function VimeoBackground() {
           playsInline
           className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none"
         >
-          <source src={video} type="video/mp4" />
+          <source src="https://res.cloudinary.com/dpyco6kcx/video/upload/v1774450789/mohit_locb5k.mp4" type="video/mp4" />
         </video>
 
       </div>
