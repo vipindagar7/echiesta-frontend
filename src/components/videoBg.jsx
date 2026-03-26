@@ -1,5 +1,4 @@
 import React from "react";
-import video from "../assets/mohit.mp4"
 export default function VimeoBackground() {
   return (
     <div className="relative w-full h-screen overflow-hidden">
@@ -27,8 +26,8 @@ export default function VimeoBackground() {
           playsInline
           className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none"
         >
-          <source src="https://res.cloudinary.com/dpyco6kcx/video/upload/v1774450789/mohit_locb5k.mp4" type="video/mp4" />
-        </video>
+          <source src="https://res.cloudinary.com/dcx4zljaa/video/upload/v1774509301/mohit_locb5k_ndjssn.mp4" type="video/mp4" />
+ß        </video>
 
       </div>
 
