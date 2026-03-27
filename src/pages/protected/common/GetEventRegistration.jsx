@@ -21,7 +21,12 @@ const GetEventRegistration = () => {
 
       const res = await axios.get(
         `${API_URL}/api/events/event-registrations?page=${page}&limit=${LIMIT}`,
-        { withCredentials: true }
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
+        }
       );
 
       setData(res.data.data);
@@ -122,13 +127,12 @@ const GetEventRegistration = () => {
 
                 <td>
                   <span
-                    className={`px-2 py-1 rounded text-white text-xs ${
-                      item.paymentStatus === "paid"
+                    className={`px-2 py-1 rounded text-white text-xs ${item.paymentStatus === "paid"
                         ? "bg-green-600"
                         : item.paymentStatus === "pending"
-                        ? "bg-yellow-500"
-                        : "bg-red-600"
-                    }`}
+                          ? "bg-yellow-500"
+                          : "bg-red-600"
+                      }`}
                   >
                     {item.paymentStatus}
                   </span>

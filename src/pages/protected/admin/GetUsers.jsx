@@ -14,7 +14,9 @@ const GetUsers = () => {
 
         const res = await axios.get(
           `${API_URL}/api/auth/getUsers`,
-          { withCredentials: true }
+          { withCredentials: true, headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`
+  } }
         );
 
         setUsers(res.data.data);
@@ -35,7 +37,9 @@ const GetUsers = () => {
 
       await axios.delete(
         `${API_URL}/api/auth/delete/${id}`,
-        { withCredentials: true }
+        { withCredentials: true, headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`
+  } }
       );
 
       setUsers((prev) => prev.filter((user) => user._id !== id));

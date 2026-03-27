@@ -14,7 +14,12 @@ const ScannerDashboard = () => {
         try {
             const res = await axios.get(
                 `${API_URL}/api/user/stats`,
-                { withCredentials: true }
+                {
+                    withCredentials: true,
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                }
             );
 
             setStats(res.data);

@@ -9,7 +9,12 @@ const UserDashboard = () => {
     try {
       const res = await axios.get(
         `${API_URL}/api/user/stats`,
-        { withCredentials: true }
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
+        }
       );
       setStats(res.data);
     } catch (error) {
@@ -34,7 +39,7 @@ const UserDashboard = () => {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-      
+
       <h1 className="text-3xl font-bold mb-6">User Dashboard</h1>
 
       {/* Cards */}

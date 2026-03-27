@@ -53,7 +53,10 @@ const StarNightRegistrations = () => {
                     email: debouncedSearch.email,
                     phone: debouncedSearch.phone
                 },
-                withCredentials: true
+                withCredentials: true,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
             });
 
             setData(Array.isArray(res.data.data) ? res.data.data : []);

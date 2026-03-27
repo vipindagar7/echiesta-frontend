@@ -22,7 +22,11 @@ const CreateUser = () => {
       await axios.post(
         `${API_URL}/api/auth/signup`,
         form,
-        { withCredentials: true }
+        { withCredentials: true,
+           headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`
+  }
+         }
       );
 
       alert("User created successfully");

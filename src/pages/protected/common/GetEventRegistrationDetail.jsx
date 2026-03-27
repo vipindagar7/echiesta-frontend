@@ -18,7 +18,12 @@ const EventRegistrationDetails = () => {
 
       const res = await axios.get(
         `${API_URL}/api/events/event-registrations/${id}`,
-        { withCredentials: true }
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
+        }
       );
 
       setData(res.data.data);
@@ -47,7 +52,7 @@ const EventRegistrationDetails = () => {
         {},
         { withCredentials: true }
       );
-        setData((prev) => ({
+      setData((prev) => ({
         ...prev,
         paymentStatus: "verified",
       }));
@@ -152,13 +157,12 @@ const EventRegistrationDetails = () => {
         <p>
           <strong>Status:</strong>{" "}
           <span
-            className={`px-2 py-1 rounded text-white ${
-              data.paymentStatus === "verified"
+            className={`px-2 py-1 rounded text-white ${data.paymentStatus === "verified"
                 ? "bg-green-600"
                 : data.paymentStatus === "pending"
-                ? "bg-yellow-500"
-                : "bg-red-600"
-            }`}
+                  ? "bg-yellow-500"
+                  : "bg-red-600"
+              }`}
           >
             {data.paymentStatus}
           </span>
@@ -186,8 +190,8 @@ const EventRegistrationDetails = () => {
           {verifying
             ? "Verifying..."
             : data.paymentStatus === "verified"
-            ? "Verified"
-            : "Verify"}
+              ? "Verified"
+              : "Verify"}
         </button>
 
         <button
@@ -198,8 +202,8 @@ const EventRegistrationDetails = () => {
           {rejecting
             ? "Rejecting..."
             : data.paymentStatus === "failed"
-            ? "Rejected"
-            : "Reject"}
+              ? "Rejected"
+              : "Reject"}
         </button>
 
       </div>

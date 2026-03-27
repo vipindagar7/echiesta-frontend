@@ -23,7 +23,12 @@ const TicketCard = () => {
 
             const res = await axios.get(
                 `${API_URL}/api/star-night/getRegistration/${id}`,
-                { withCredentials: true }
+                {
+                    withCredentials: true,
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                }
             );
 
             setTicket(res.data.data);
@@ -41,7 +46,12 @@ const TicketCard = () => {
             await axios.patch(
                 `${API_URL}/api/star-night/checkin/${ticket._id}`,
                 {},
-                { withCredentials: true }
+                {
+                    withCredentials: true,
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                }
             );
 
             setTicket((prev) => ({ ...prev, isCheckedIn: true }));
@@ -59,7 +69,12 @@ const TicketCard = () => {
             await axios.patch(
                 `${API_URL}/api/star-night/checkout/${ticket._id}`,
                 {},
-                { withCredentials: true }
+                {
+                    withCredentials: true,
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                }
             );
 
             setTicket((prev) => ({ ...prev, isCheckedIn: false }));
@@ -78,6 +93,9 @@ const TicketCard = () => {
 
             await axios.delete(`${API_URL}/api/star-night/delete/${ticket._id}`, {
                 withCredentials: true,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
             });
 
             alert("Deleted successfully");
@@ -114,8 +132,8 @@ const TicketCard = () => {
                 <div className="flex justify-center mb-4">
                     <span
                         className={`px-4 py-1 rounded-full text-sm font-semibold ${ticket?.isCheckedIn
-                                ? "bg-green-500/20 text-green-400"
-                                : "bg-yellow-500/20 text-yellow-400"
+                            ? "bg-green-500/20 text-green-400"
+                            : "bg-yellow-500/20 text-yellow-400"
                             }`}
                     >
                         {ticket?.isCheckedIn ? "Checked-in" : "Not Checked-in"}
