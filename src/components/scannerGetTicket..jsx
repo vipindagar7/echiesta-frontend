@@ -22,7 +22,11 @@ const ScannerTicketCard = () => {
 
             const res = await axios.get(
                 `${API_URL}/api/star-night/getRegistration/${id}`,
-                { withCredentials: true }
+                {
+                    withCredentials: true, headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                }
             );
 
             setTicket(res.data.data);

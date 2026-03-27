@@ -50,7 +50,12 @@ const ScannerCamera = () => {
 
             const res = await axios.get(
                 `${API_URL}/api/star-night/search?${type}=${value}`,
-                { withCredentials: true }
+                {
+                    withCredentials: true,
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                }
             );
 
             const data = res.data.data;
