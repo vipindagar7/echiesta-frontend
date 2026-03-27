@@ -16,11 +16,19 @@ const ScannerDashboard = () => {
                 `${API_URL}/api/user/stats`,
                 { withCredentials: true }
             );
+
             setStats(res.data);
+
         } catch (error) {
             console.error(
                 error.response?.data?.message || "Error fetching stats"
             );
+
+            // 🚨 IMPORTANT FIX
+            if (error.response?.status === 401) {
+                navigate("/admin-login"); // or your login route
+            }
+
         } finally {
             setLoading(false);
         }
@@ -58,30 +66,10 @@ const ScannerDashboard = () => {
 
             {/* Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-
-                <Card
-                    title="Total Event Registrations"
-                    value={stats.totalEventRegistrations}
-                    color="blue"
-                />
-
-                <Card
-                    title="Total Concert Registrations"
-                    value={stats.totalConcertRegistrations}
-                    color="purple"
-                />
-
-                <Card
-                    title="Checked-in (Concert)"
-                    value={stats.checkedInConcert}
-                    color="green"
-                />
-
-                <Card
-                    title="Pending Check-ins"
-                    value={stats.pendingConcert}
-                    color="yellow"
-                />
+                <Card title="Total Event Registrations" value={stats?.totalEventRegistrations || 0} color="blue" />
+                <Card title="Total Concert Registrations" value={stats?.totalConcertRegistrations || 0} color="purple" />
+                <Card title="Checked-in (Concert)" value={stats?.checkedInConcert || 0} color="green" />
+                <Card title="Pending Check-ins" value={stats?.pendingConcert || 0} color="yellow" />
 
             </div>
         </div>
