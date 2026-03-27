@@ -29,9 +29,8 @@ export default function Login() {
       );
 
       // store user
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-      localStorage.setItem("token", JSON.stringify(res.data.token));
-
+      localStorage.setItem("user", res.data.user);
+      localStorage.setItem("token", res.data.token);
       // redirect based on role
       if (res.data.user.role === "admin") {
         navigate("/admin");
@@ -79,11 +78,10 @@ export default function Login() {
 
         <button
           disabled={loading}
-          className={`w-full py-2 rounded text-white transition ${
-            loading
+          className={`w-full py-2 rounded text-white transition ${loading
               ? "bg-gray-500 cursor-not-allowed"
               : "bg-blue-600 hover:bg-blue-700"
-          }`}
+            }`}
         >
           {loading ? "Logging in..." : "Login"}
         </button>
