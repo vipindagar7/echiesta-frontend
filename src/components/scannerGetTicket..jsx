@@ -58,7 +58,9 @@ const ScannerTicketCard = () => {
             await axios.patch(
                 `${API_URL}/api/star-night/checkin/${ticket._id}`,
                 {},
-                { withCredentials: true }
+                { withCredentials: true, headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    } }
             );
 
             setTicket((prev) => ({
