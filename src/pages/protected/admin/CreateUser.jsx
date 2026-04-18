@@ -83,6 +83,7 @@ const CreateUser = () => {
           <option value="user">User</option>
           <option value="admin">Admin</option>
           <option value="scanner">Scanner</option>
+          <option value="gamer">Gamer</option>
         </select>
 
         <button

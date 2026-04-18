@@ -11,6 +11,10 @@ export default function Contact() {
       phone: "8130707852",
     },
     {
+      name: "Raghav",
+      phone: "8130707852",
+    },
+    {
       name: "Shuddhi",
       phone: "9897988170",
     },

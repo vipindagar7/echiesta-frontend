@@ -41,6 +41,8 @@ export default function Login() {
         navigate("/admin");
       } else if (role === "user") {
         navigate("/user");
+      } else if (role === "gamer") {
+        navigate("/gamer")
       } else {
         navigate("/scanner");
       }

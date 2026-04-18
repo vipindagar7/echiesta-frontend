@@ -26,12 +26,9 @@ import GetConcertRegistration from './pages/protected/common/GetConcertRegistrat
 import GetEventRegistration from './pages/protected/common/GetEventRegistration';
 import EventRegistrationDetails from './pages/protected/common/GetEventRegistrationDetail';
 import TicketCard from './pages/protected/common/GetConcertDetails';
+import SearchUser from './components/searchConcert';
 import ScannerCamera from './components/scannerCamers';
 import ScannerTicketCard from './components/scannerGetTicket.';
-import GamerLayout from './layouts/gamerLayout';
-import GamerDashboard from './pages/protected/gaming/GamingDashboard';
-import GetGamingRegistration from './pages/protected/gaming/GetGamingRegistration';
-import GetCounslingRegistration from './pages/protected/gaming/GetCounslingRegistration';
 
 function App() {
   return (
@@ -43,6 +40,10 @@ function App() {
           {/* Layout Wrapper */}
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/register-events" element={<RegisterEvent />} />
+            <Route path="/register" element={<RegisterEvent />} />
+            <Route path="/star-night" element={<RegisterDj />} />
+            <Route path="/star-night-register" element={<StarNightRegister />} />
             <Route path="/admin-login" element={<Login />} />
           </Route>
 
@@ -98,23 +99,7 @@ function App() {
             <Route path="event-registration-details/:id" element={<EventRegistrationDetails />} />
 
           </Route>
-          {/* admin */}
-          <Route
-            path="/gamer"
-            element={
-              <ProtectedRoute role="gamer">
-                <GamerLayout />
-              </ProtectedRoute>
-            }
-          >
-            {/* Nested routes */}
-            <Route index element={<GamerDashboard />} />
-            <Route path="getGamingRegistration" element={<GetGamingRegistration />} />
 
-            <Route path="getCounslingRegistration" element={<GetCounslingRegistration />} />
-
-          </Route>d
-          {/* scanner dashboard */}
           <Route
             path="/scanner"
             element={
