@@ -33,6 +33,8 @@ export default function AdminLayout() {
           <li className="hover:text-blue-400 cursor-pointer"><a href="/admin/get-users">Get Users</a></li>
           <li className="hover:text-blue-400 cursor-pointer"><a href="/admin/get-concert-registration">Concert Registration</a></li>
           <li className="hover:text-blue-400 cursor-pointer"><a href="/admin/get-event-registration">Event Registration</a></li>
+          <li className="hover:text-blue-400 cursor-pointer"><a href="/admin/getGamingRegistration">Gaming Registration</a></li>
+          <li className="hover:text-blue-400 cursor-pointer"><a href="/admin/getCounslingRegistration">Counsling Registration</a></li>
         </ul>
 
       </div>

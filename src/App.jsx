@@ -96,7 +96,8 @@ function App() {
             <Route path="get-concert-registration" element={<GetConcertRegistration />} />
             <Route path="get-event-registration" element={<GetEventRegistration />} />
             <Route path="event-registration-details/:id" element={<EventRegistrationDetails />} />
-
+            <Route path="getGamingRegistration" element={<GetGamingRegistration />} />
+            <Route path="getCounslingRegistration" element={<GetCounslingRegistration />} />
           </Route>
           {/* admin */}
           <Route
